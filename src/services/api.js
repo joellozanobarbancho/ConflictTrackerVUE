@@ -53,16 +53,44 @@ const demoData = {
     {
       id: 1,
       conflictId: 1,
-      conflictName: 'Conflicto Demo 1',
-      name: 'Facción A',
-      supporterCountryCodes: ['ESP']
+      conflictName: 'Guerra Civil Española',
+      name: 'Bando Republicano',
+      supporterCountryCodes: ['ESP', 'FRA']
     },
     {
       id: 2,
+      conflictId: 1,
+      conflictName: 'Guerra Civil Española',
+      name: 'Bando Nacionalista',
+      supporterCountryCodes: ['ESP']
+    },
+    {
+      id: 3,
       conflictId: 2,
-      conflictName: 'Conflicto Demo 2',
-      name: 'Facción B',
+      conflictName: 'Caída del Muro de Berlín',
+      name: 'Bloque Oriental',
       supporterCountryCodes: ['DEU']
+    },
+    {
+      id: 4,
+      conflictId: 2,
+      conflictName: 'Caída del Muro de Berlín',
+      name: 'Bloque Occidental',
+      supporterCountryCodes: ['DEU']
+    },
+    {
+      id: 5,
+      conflictId: 3,
+      conflictName: 'Conflicto Ucrania-Estados Unidos',
+      name: 'Ucrania',
+      supporterCountryCodes: ['UKR']
+    },
+    {
+      id: 6,
+      conflictId: 3,
+      conflictName: 'Conflicto Ucrania-Estados Unidos',
+      name: 'Estados Unidos',
+      supporterCountryCodes: ['USA']
     }
   ]
 }

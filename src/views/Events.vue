@@ -1,13 +1,23 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useEventsStore } from '../stores/events'
 import CountryFlag from '../components/CountryFlag.vue'
 
 const eventsStore = useEventsStore()
-const conflictId = ref('')
+const searchText = ref("")
+
+const filteredEvents = computed(() => {
+  const text = searchText.value.trim().toLowerCase()
+  if (!text) return eventsStore.events
+  return eventsStore.events.filter(e =>
+    (e.conflictName?.toLowerCase().includes(text) ||
+     e.location?.toLowerCase().includes(text) ||
+     e.description?.toLowerCase().includes(text))
+  )
+})
 
 const loadEvents = () => {
-  eventsStore.fetchEvents(conflictId.value)
+  eventsStore.fetchEvents()
 }
 
 onMounted(loadEvents)
@@ -15,15 +25,14 @@ onMounted(loadEvents)
 
 <template>
   <section class="panel">
-    <h1>Eventos</h1>
+    <h1>{{ $t('events.title') }}</h1>
     <div class="row">
       <input
-        v-model="conflictId"
-        type="number"
-        min="1"
-        placeholder="Filtrar por conflictId"
+        v-model="searchText"
+        type="text"
+        :placeholder="$t('events.filter_placeholder')"
+        style="max-width:220px"
       />
-      <button class="primary" @click="loadEvents">{{$t('events.search')}}</button>
     </div>
     <p v-if="eventsStore.loading" class="muted">Cargando eventos...</p>
     <p v-if="eventsStore.error" class="danger">{{ eventsStore.error }}</p>
@@ -34,7 +43,7 @@ onMounted(loadEvents)
       No hay eventos para mostrar.
     </div>
     <div class="list" v-else>
-      <article v-for="event in eventsStore.events" :key="event.id" class="panel">
+      <article v-for="event in filteredEvents" :key="event.id" class="panel">
         <h3>{{ event.location }} - {{ event.eventDate }}</h3>
         <p class="muted">{{ event.description }}</p>
         <p>

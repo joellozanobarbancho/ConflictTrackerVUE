@@ -1,5 +1,15 @@
 export default {
   ca: {
+    factions: {
+      search: 'Cerca',
+      filter_placeholder: 'Cerca per nom...',
+      title: 'Faccions',
+    },
+    events: {
+      search: 'Cerca',
+      filter_placeholder: 'Cerca per nom...',
+      title: 'Esdeveniments',
+    },
     conflicts: {
       title: 'Conflictes',
       filter_status: 'Filtra per estat',
@@ -12,9 +22,9 @@ export default {
       countries: 'Països',
       actions: 'Accions',
       save: 'Desa',
-        search: 'Cerca',
-        update: 'Actualitza',
-        delete: 'Elimina',
+      search: 'Cerca',
+      update: 'Actualitza',
+      delete: 'Elimina',
       apply: 'Aplica',
       no_conflicts: 'No hi ha conflictes per mostrar.',
       detail: 'Veure detall',
@@ -26,10 +36,20 @@ export default {
       events: 'Esdeveniments',
       factions: 'Faccions',
       lang: 'Idioma',
-      app: 'ConflictTracker',
-    },
+      app: 'ConflictTracker'
+    }
   },
   en: {
+    factions: {
+      search: 'Search',
+      filter_placeholder: 'Search by name...',
+      title: 'Factions',
+    },
+    events: {
+      search: 'Search',
+      filter_placeholder: 'Search by name...',
+      title: 'Events',
+    },
     conflicts: {
       title: 'Conflicts',
       filter_status: 'Filter by status',
@@ -42,21 +62,9 @@ export default {
       countries: 'Countries',
       actions: 'Actions',
       save: 'Save',
-        search: 'Search',
-        update: 'Update',
-        delete: 'Delete',
-          events: {
-            search: 'Cerca',
-          },
-          factions: {
-            search: 'Cerca',
-          },
-          events: {
-            search: 'Search',
-          },
-          factions: {
-            search: 'Search',
-          },
+      search: 'Search',
+      update: 'Update',
+      delete: 'Delete',
       apply: 'Apply',
       no_conflicts: 'No conflicts to show.',
       detail: 'View detail',
@@ -68,7 +76,7 @@ export default {
       events: 'Events',
       factions: 'Factions',
       lang: 'Language',
-      app: 'ConflictTracker',
-    },
-  },
+      app: 'ConflictTracker'
+    }
+  }
 }

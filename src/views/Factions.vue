@@ -1,13 +1,21 @@
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
 import { useFactionsStore } from '../stores/factions'
 import CountryFlag from '../components/CountryFlag.vue'
 
 const factionsStore = useFactionsStore()
-const conflictId = ref('')
+const searchText = ref("")
+
+const filteredFactions = computed(() => {
+  const text = searchText.value.trim().toLowerCase()
+  if (!text) return factionsStore.factions
+  return factionsStore.factions.filter(f =>
+    f.name?.toLowerCase().includes(text)
+  )
+})
 
 const loadFactions = () => {
-  factionsStore.fetchFactions(conflictId.value)
+  factionsStore.fetchFactions()
 }
 
 onMounted(loadFactions)
@@ -15,15 +23,14 @@ onMounted(loadFactions)
 
 <template>
   <section class="panel">
-    <h1>Facciones</h1>
+    <h1>{{ $t('factions.title') }}</h1>
     <div class="row">
       <input
-        v-model="conflictId"
-        type="number"
-        min="1"
-        placeholder="Filtrar por conflictId"
+        v-model="searchText"
+        type="text"
+        :placeholder="$t('factions.filter_placeholder')"
+        style="max-width:220px"
       />
-      <button class="primary" @click="loadFactions">{{$t('factions.search')}}</button>
     </div>
     <p v-if="factionsStore.loading" class="muted">Cargando facciones...</p>
     <p v-if="factionsStore.error" class="danger">{{ factionsStore.error }}</p>
@@ -34,7 +41,7 @@ onMounted(loadFactions)
       No hay facciones para mostrar.
     </div>
     <div class="list" v-else>
-      <article v-for="faction in factionsStore.factions" :key="faction.id" class="panel">
+      <article v-for="faction in filteredFactions" :key="faction.id" class="panel">
         <h3>{{ faction.name }}</h3>
         <p>
           <strong>conflictId:</strong> {{ faction.conflictId }}
