@@ -2,6 +2,8 @@
 import { computed, onMounted, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useConflictsStore } from '../stores/conflicts'
+import CountryFlag from '../components/CountryFlag.vue'
+
 
 const route = useRoute()
 const router = useRouter()
@@ -103,7 +105,17 @@ onMounted(loadDetail)
       <p><strong>Facciones:</strong> {{ selected.factions?.length ?? 0 }}</p>
       <p><strong>Eventos:</strong> {{ selected.events?.length ?? 0 }}</p>
       <p class="muted">
-        Países: {{ (selected.countries ?? []).map((c) => c.code).join(', ') || 'Sin países' }}
+        Países:
+        <template v-if="selected.countries && selected.countries.length">
+          <CountryFlag
+            v-for="c in selected.countries"
+            :key="c.code"
+            :code="c.code"
+          />
+        </template>
+        <template v-else>
+          Sin países
+        </template>
       </p>
       <div class="actions">
         <RouterLink to="/conflicts">Volver a conflictos</RouterLink>

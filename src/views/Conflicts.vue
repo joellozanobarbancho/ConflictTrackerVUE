@@ -1,6 +1,19 @@
+
 <script setup>
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, computed } from 'vue'
+const searchText = ref("")
+
+// Filtrado reactivo por nombre
+const filteredConflicts = computed(() => {
+  const text = searchText.value.trim().toLowerCase()
+  if (!text) return conflictsStore.conflicts
+  return conflictsStore.conflicts.filter(c =>
+    c.name?.toLowerCase().includes(text)
+  )
+})
 import { useConflictsStore } from '../stores/conflicts'
+import CountryFlag from '../components/CountryFlag.vue'
+
 
 const conflictsStore = useConflictsStore()
 
@@ -58,6 +71,12 @@ onMounted(loadConflicts)
         <option value="ENDED">ENDED</option>
       </select>
       <button class="primary" @click="loadConflicts">Aplicar</button>
+      <input
+        v-model="searchText"
+        placeholder="Buscar por nombre..."
+        style="max-width:220px"
+        type="text"
+      />
     </div>
     <p v-if="conflictsStore.loading" class="muted">Cargando conflictos...</p>
     <p v-if="conflictsStore.error" class="danger">{{ conflictsStore.error }}</p>
@@ -86,23 +105,48 @@ onMounted(loadConflicts)
 
   <section class="panel">
     <h2>Listado</h2>
-    <div v-if="conflictsStore.conflicts.length === 0" class="muted">
+    <div v-if="filteredConflicts.length === 0" class="muted">
       No hay conflictos para mostrar.
     </div>
     <div class="list" v-else>
-      <article v-for="conflict in conflictsStore.conflicts" :key="conflict.id" class="panel">
-        <h3>{{ conflict.name }}</h3>
-        <p>
-          <strong>Estado:</strong> {{ conflict.status }} |
-          <strong>Inicio:</strong> {{ conflict.startDate }}
-        </p>
-        <p class="muted">{{ conflict.description }}</p>
-        <p class="muted">
-          Países: {{ conflict.countryCodes?.join(', ') || 'Sin países' }}
-        </p>
-        <div class="actions">
-          <RouterLink :to="`/conflicts/${conflict.id}`">Ver detalle</RouterLink>
+      <article v-for="conflict in filteredConflicts" :key="conflict.id" class="panel" style="display:flex;align-items:flex-start;gap:1.5em;">
+        <div style="flex:1 1 0;min-width:0;">
+          <h3>{{ conflict.name }}</h3>
+          <p>
+            <strong>Estado: </strong>
+            <span
+              class="status"
+              :class="{
+                'status-active': conflict.status === 'ACTIVE',
+                'status-frozen': conflict.status === 'FROZEN',
+                'status-ended': conflict.status === 'ENDED',
+              }"
+              :title="conflict.status"
+            >
+              {{ conflict.status }}
+            </span> 
+            |
+            <strong>Inicio:</strong> {{ conflict.startDate }}
+          </p>
+          <p class="muted">{{ conflict.description }}</p>
+          <p class="muted">
+            Países:
+            <template v-if="conflict.countryCodes && conflict.countryCodes.length">
+              <CountryFlag
+                v-for="code in conflict.countryCodes"
+                :key="code"
+                :code="code"
+              />
+            </template>
+            <template v-else>
+              Sin países
+            </template>
+          </p>
+          <div class="actions">
+            <RouterLink :to="`/conflicts/${conflict.id}`">Ver detalle</RouterLink>
+          </div>
         </div>
+
       </article>
     </div>
   </section>

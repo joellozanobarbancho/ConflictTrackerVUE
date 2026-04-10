@@ -31,7 +31,12 @@ export const useConflictsStore = defineStore(
       loading.value = true
       setError('')
       try {
-        selectedConflict.value = await api.get(`/conflicts/${id}`)
+        const conflict = await api.get(`/conflicts/${id}`)
+        // Normaliza countries para la vista de detalle
+        if (conflict && conflict.countryCodes) {
+          conflict.countries = conflict.countryCodes.map(code => ({ code }))
+        }
+        selectedConflict.value = conflict
       } catch (e) {
         setError(e.message)
       } finally {

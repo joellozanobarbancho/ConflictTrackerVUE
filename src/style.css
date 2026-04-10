@@ -1,3 +1,28 @@
+/* Estados de conflicto visuales */
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-weight: 600;
+  padding: 0.15em 0.7em;
+  border-radius: 1em;
+  font-size: 0.97em;
+}
+.status-active {
+  background: #e0f7fa;
+  color: #00796b;
+  border: 1px solid #4dd0e1;
+}
+.status-frozen {
+  background: #fffde7;
+  color: #fbc02d;
+  border: 1px solid #ffe082;
+}
+.status-ended {
+  background: #fbe9e7;
+  color: #d84315;
+  border: 1px solid #ffab91;
+}
 * {
   box-sizing: border-box;
 }

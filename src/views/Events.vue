@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useEventsStore } from '../stores/events'
+import CountryFlag from '../components/CountryFlag.vue'
 
 const eventsStore = useEventsStore()
 const conflictId = ref('')
@@ -39,6 +40,13 @@ onMounted(loadEvents)
         <p>
           <strong>conflictId:</strong> {{ event.conflictId }}
           <span class="muted">({{ event.conflictName }})</span>
+          <template v-if="event.countryCodes && event.countryCodes.length">
+            <CountryFlag
+              v-for="code in event.countryCodes"
+              :key="code"
+              :code="code"
+            />
+          </template>
         </p>
       </article>
     </div>

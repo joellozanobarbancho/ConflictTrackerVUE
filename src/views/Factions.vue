@@ -1,6 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import { useFactionsStore } from '../stores/factions'
+import CountryFlag from '../components/CountryFlag.vue'
 
 const factionsStore = useFactionsStore()
 const conflictId = ref('')
@@ -41,7 +42,16 @@ onMounted(loadFactions)
         </p>
         <p class="muted">
           Soporte países:
-          {{ faction.supporterCountryCodes?.join(', ') || 'Sin datos' }}
+          <template v-if="faction.supporterCountryCodes && faction.supporterCountryCodes.length">
+            <CountryFlag
+              v-for="code in faction.supporterCountryCodes"
+              :key="code"
+              :code="code"
+            />
+          </template>
+          <template v-else>
+            Sin datos
+          </template>
         </p>
       </article>
     </div>
