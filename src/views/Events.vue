@@ -34,13 +34,13 @@ onMounted(loadEvents)
         style="max-width:220px"
       />
     </div>
-    <p v-if="eventsStore.loading" class="muted">Cargando eventos...</p>
+    <p v-if="eventsStore.loading" class="muted">{{ $t('common.loading') }}</p>
     <p v-if="eventsStore.error" class="danger">{{ eventsStore.error }}</p>
   </section>
 
   <section class="panel">
     <div v-if="eventsStore.events.length === 0" class="muted">
-      No hay eventos para mostrar.
+      {{ $t('common.no_data') }}
     </div>
     <div class="list" v-else>
       <article v-for="event in filteredEvents" :key="event.id" class="panel">

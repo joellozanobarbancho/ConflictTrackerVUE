@@ -65,7 +65,7 @@ onMounted(loadConflicts)
     <div class="row">
       <label for="status">{{ $t('conflicts.filter_status') }}</label>
       <select id="status" v-model="statusFilter">
-        <option value="">Todos</option>
+        <option value="">{{ $t('conflicts.filter_all') }}</option>
         <option value="ACTIVE">ACTIVE</option>
         <option value="FROZEN">FROZEN</option>
         <option value="ENDED">ENDED</option>
@@ -78,7 +78,7 @@ onMounted(loadConflicts)
         type="text"
       />
     </div>
-    <p v-if="conflictsStore.loading" class="muted">Cargando conflictos...</p>
+    <p v-if="conflictsStore.loading" class="muted">{{ $t('common.loading') }}</p>
     <p v-if="conflictsStore.error" class="danger">{{ conflictsStore.error }}</p>
   </section>
 
@@ -139,7 +139,7 @@ onMounted(loadConflicts)
               />
             </template>
             <template v-else>
-              Sin países
+              {{ $t('conflicts.no_countries') }}
             </template>
           </p>
           <div class="actions">

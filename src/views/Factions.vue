@@ -32,13 +32,13 @@ onMounted(loadFactions)
         style="max-width:220px"
       />
     </div>
-    <p v-if="factionsStore.loading" class="muted">Cargando facciones...</p>
+    <p v-if="factionsStore.loading" class="muted">{{ $t('common.loading') }}</p>
     <p v-if="factionsStore.error" class="danger">{{ factionsStore.error }}</p>
   </section>
 
   <section class="panel">
     <div v-if="factionsStore.factions.length === 0" class="muted">
-      No hay facciones para mostrar.
+      {{ $t('common.no_data') }}
     </div>
     <div class="list" v-else>
       <article v-for="faction in filteredFactions" :key="faction.id" class="panel">
@@ -48,7 +48,7 @@ onMounted(loadFactions)
           <span class="muted">({{ faction.conflictName }})</span>
         </p>
         <p class="muted">
-          Soporte países:
+          {{ $t('common.supported_countries') }}
           <template v-if="faction.supporterCountryCodes && faction.supporterCountryCodes.length">
             <CountryFlag
               v-for="code in faction.supporterCountryCodes"
@@ -57,7 +57,7 @@ onMounted(loadFactions)
             />
           </template>
           <template v-else>
-            Sin datos
+            {{ $t('common.no_data_short') }}
           </template>
         </p>
       </article>

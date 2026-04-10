@@ -4,24 +4,24 @@ import { api } from '../services/api'
 
 <template>
   <section class="panel">
-    <h1>ConflictTracker Frontend</h1>
+    <h1>{{ $t('home.title') }}</h1>
     <p class="muted">
-      Frontend separado del backend, preparado para consumir tu API REST.
+      {{ $t('home.subtitle') }}
     </p>
     <div class="actions">
-      <RouterLink to="/conflicts">Ir a conflictos</RouterLink>
-      <RouterLink to="/events">Ir a eventos</RouterLink>
-      <RouterLink to="/factions">Ir a facciones</RouterLink>
+      <RouterLink to="/conflicts">{{ $t('home.go_conflicts') }}</RouterLink>
+      <RouterLink to="/events">{{ $t('home.go_events') }}</RouterLink>
+      <RouterLink to="/factions">{{ $t('home.go_factions') }}</RouterLink>
     </div>
   </section>
 
   <section class="panel">
-    <h2>Configuración API</h2>
+    <h2>{{ $t('home.api_config') }}</h2>
     <p>
-      Base URL actual: <strong>{{ api.baseUrl }}</strong>
+      {{ $t('home.base_url') }} <strong>{{ api.baseUrl }}</strong>
     </p>
     <p class="muted">
-      Puedes cambiarla con <strong>VITE_API_BASE_URL</strong>.
+      {{ $t('home.change_with') }} <strong>VITE_API_BASE_URL</strong>.
     </p>
   </section>
 </template>
