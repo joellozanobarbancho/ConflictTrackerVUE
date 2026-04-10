@@ -23,7 +23,7 @@ onMounted(loadEvents)
         min="1"
         placeholder="Filtrar por conflictId"
       />
-      <button class="primary" @click="loadEvents">Buscar</button>
+      <button class="primary" @click="loadEvents">{{$t('events.search')}}</button>
     </div>
     <p v-if="eventsStore.loading" class="muted">Cargando eventos...</p>
     <p v-if="eventsStore.error" class="danger">{{ eventsStore.error }}</p>

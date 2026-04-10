@@ -94,8 +94,8 @@ onMounted(loadDetail)
           placeholder="Códigos países (ej: ESP,FRA,DEU)"
         />
         <div class="actions">
-          <button class="primary" type="submit">Actualizar</button>
-          <button type="button" @click="removeConflict">Eliminar</button>
+          <button class="primary" type="submit">{{$t('conflicts.update')}}</button>
+          <button type="button" @click="removeConflict">{{$t('conflicts.delete')}}</button>
         </div>
       </form>
     </article>

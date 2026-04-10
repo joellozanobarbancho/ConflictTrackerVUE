@@ -23,7 +23,7 @@ onMounted(loadFactions)
         min="1"
         placeholder="Filtrar por conflictId"
       />
-      <button class="primary" @click="loadFactions">Buscar</button>
+      <button class="primary" @click="loadFactions">{{$t('factions.search')}}</button>
     </div>
     <p v-if="factionsStore.loading" class="muted">Cargando facciones...</p>
     <p v-if="factionsStore.error" class="danger">{{ factionsStore.error }}</p>

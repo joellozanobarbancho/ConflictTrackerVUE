@@ -61,19 +61,19 @@ onMounted(loadConflicts)
 
 <template>
   <section class="panel">
-    <h1>Conflictos</h1>
+    <h1>{{ $t('conflicts.title') }}</h1>
     <div class="row">
-      <label for="status">Filtrar por estado</label>
+      <label for="status">{{ $t('conflicts.filter_status') }}</label>
       <select id="status" v-model="statusFilter">
         <option value="">Todos</option>
         <option value="ACTIVE">ACTIVE</option>
         <option value="FROZEN">FROZEN</option>
         <option value="ENDED">ENDED</option>
       </select>
-      <button class="primary" @click="loadConflicts">Aplicar</button>
+      <button class="primary" @click="loadConflicts">{{ $t('conflicts.apply') }}</button>
       <input
         v-model="searchText"
-        placeholder="Buscar por nombre..."
+        :placeholder="$t('conflicts.filter_placeholder')"
         style="max-width:220px"
         type="text"
       />
@@ -83,37 +83,37 @@ onMounted(loadConflicts)
   </section>
 
   <section class="panel">
-    <h2>Crear conflicto</h2>
+    <h2>{{ $t('conflicts.create_title') }}</h2>
     <form @submit.prevent="createConflict">
-      <input v-model="form.name" placeholder="Nombre" required />
+      <input v-model="form.name" :placeholder="$t('conflicts.name')" required />
       <input v-model="form.startDate" type="date" required />
       <select v-model="form.status" required>
         <option value="ACTIVE">ACTIVE</option>
         <option value="FROZEN">FROZEN</option>
         <option value="ENDED">ENDED</option>
       </select>
-      <textarea v-model="form.description" placeholder="Descripción" required />
+      <textarea v-model="form.description" :placeholder="$t('conflicts.description')" required />
       <input
         v-model="form.countryCodes"
-        placeholder="Códigos países (ej: ESP,FRA,DEU)"
+        :placeholder="$t('conflicts.countries_placeholder')"
       />
       <div class="actions">
-        <button class="primary" type="submit">Guardar</button>
+        <button class="primary" type="submit">{{ $t('conflicts.save') }}</button>
       </div>
     </form>
   </section>
 
   <section class="panel">
-    <h2>Listado</h2>
+    <h2>{{ $t('conflicts.actions') }}</h2>
     <div v-if="filteredConflicts.length === 0" class="muted">
-      No hay conflictos para mostrar.
+      {{ $t('conflicts.no_conflicts') }}
     </div>
     <div class="list" v-else>
       <article v-for="conflict in filteredConflicts" :key="conflict.id" class="panel" style="display:flex;align-items:flex-start;gap:1.5em;">
         <div style="flex:1 1 0;min-width:0;">
           <h3>{{ conflict.name }}</h3>
           <p>
-            <strong>Estado: </strong>
+            <strong>{{ $t('conflicts.status') }}: </strong>
             <span
               class="status"
               :class="{
@@ -126,11 +126,11 @@ onMounted(loadConflicts)
               {{ conflict.status }}
             </span> 
             |
-            <strong>Inicio:</strong> {{ conflict.startDate }}
+            <strong>{{ $t('conflicts.start') }}:</strong> {{ conflict.startDate }}
           </p>
           <p class="muted">{{ conflict.description }}</p>
           <p class="muted">
-            Países:
+            {{ $t('conflicts.countries') }}:
             <template v-if="conflict.countryCodes && conflict.countryCodes.length">
               <CountryFlag
                 v-for="code in conflict.countryCodes"
@@ -143,7 +143,7 @@ onMounted(loadConflicts)
             </template>
           </p>
           <div class="actions">
-            <RouterLink :to="`/conflicts/${conflict.id}`">Ver detalle</RouterLink>
+            <RouterLink :to="`/conflicts/${conflict.id}`">{{ $t('conflicts.detail') }}</RouterLink>
           </div>
         </div>
 
