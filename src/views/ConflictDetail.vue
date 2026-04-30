@@ -102,11 +102,11 @@ onMounted(loadDetail)
 
     <article class="panel">
       <h2>Relaciones</h2>
-      <p><strong>Facciones:</strong> {{ selected.factions?.length ?? 0 }}</p>
-      <p><strong>Eventos:</strong> {{ selected.events?.length ?? 0 }}</p>
+      <p><strong>Facciones:</strong> {{ selected?.factions?.length ?? 0 }}</p>
+      <p><strong>Eventos:</strong> {{ selected?.events?.length ?? 0 }}</p>
       <p class="muted">
         Países:
-        <template v-if="selected.countries && selected.countries.length">
+        <template v-if="selected?.countries?.length">
           <CountryFlag
             v-for="c in selected.countries"
             :key="c.code"

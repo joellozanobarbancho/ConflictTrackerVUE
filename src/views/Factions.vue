@@ -37,7 +37,7 @@ onMounted(loadFactions)
   </section>
 
   <section class="panel">
-    <div v-if="factionsStore.factions.length === 0" class="muted">
+    <div v-if="!factionsStore.factions?.length" class="muted">
       {{ $t('common.no_data') }}
     </div>
     <div class="list" v-else>
@@ -49,7 +49,7 @@ onMounted(loadFactions)
         </p>
         <p class="muted">
           {{ $t('common.supported_countries') }}
-          <template v-if="faction.supporterCountryCodes && faction.supporterCountryCodes.length">
+          <template v-if="faction?.supporterCountryCodes?.length">
             <CountryFlag
               v-for="code in faction.supporterCountryCodes"
               :key="code"

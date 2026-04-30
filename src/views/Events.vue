@@ -39,7 +39,7 @@ onMounted(loadEvents)
   </section>
 
   <section class="panel">
-    <div v-if="eventsStore.events.length === 0" class="muted">
+    <div v-if="!eventsStore.events?.length" class="muted">
       {{ $t('common.no_data') }}
     </div>
     <div class="list" v-else>
@@ -49,7 +49,7 @@ onMounted(loadEvents)
         <p>
           <strong>conflictId:</strong> {{ event.conflictId }}
           <span class="muted">({{ event.conflictName }})</span>
-          <template v-if="event.countryCodes && event.countryCodes.length">
+          <template v-if="event?.countryCodes?.length">
             <CountryFlag
               v-for="code in event.countryCodes"
               :key="code"

@@ -105,7 +105,7 @@ onMounted(loadConflicts)
 
   <section class="panel">
     <h2>{{ $t('conflicts.actions') }}</h2>
-    <div v-if="filteredConflicts.length === 0" class="muted">
+    <div v-if="!filteredConflicts?.length" class="muted">
       {{ $t('conflicts.no_conflicts') }}
     </div>
     <div class="list" v-else>
@@ -131,7 +131,7 @@ onMounted(loadConflicts)
           <p class="muted">{{ conflict.description }}</p>
           <p class="muted">
             {{ $t('conflicts.countries') }}:
-            <template v-if="conflict.countryCodes && conflict.countryCodes.length">
+            <template v-if="conflict?.countryCodes?.length">
               <CountryFlag
                 v-for="code in conflict.countryCodes"
                 :key="code"
