@@ -19,7 +19,7 @@ export const useConflictsStore = defineStore(
       setError('')
       try {
         const query = status ? `?status=${encodeURIComponent(status)}` : ''
-        conflicts.value = await api.get(`/conflicts${query}`)
+        conflicts.value = await api.get(`/api/v1/conflicts${query}`)
       } catch (e) {
         setError(e.message)
       } finally {
@@ -31,7 +31,7 @@ export const useConflictsStore = defineStore(
       loading.value = true
       setError('')
       try {
-        const conflict = await api.get(`/conflicts/${id}`)
+        const conflict = await api.get(`/api/v1/conflicts/${id}`)
         // Normaliza countries para la vista de detalle
         if (conflict && conflict.countryCodes) {
           conflict.countries = conflict.countryCodes.map(code => ({ code }))
@@ -46,14 +46,14 @@ export const useConflictsStore = defineStore(
 
     const createConflict = async (payload) => {
       setError('')
-      const created = await api.post('/conflicts', payload)
+      const created = await api.post('/api/v1/conflicts', payload)
       await fetchConflicts()
       return created
     }
 
     const updateConflict = async (id, payload) => {
       setError('')
-      const updated = await api.put(`/conflicts/${id}`, payload)
+      const updated = await api.put(`/api/v1/conflicts/${id}`, payload)
       await fetchConflictById(id)
       await fetchConflicts()
       return updated
@@ -61,7 +61,7 @@ export const useConflictsStore = defineStore(
 
     const deleteConflict = async (id) => {
       setError('')
-      await api.delete(`/conflicts/${id}`)
+      await api.delete(`/api/v1/conflicts/${id}`)
       selectedConflict.value = null
       await fetchConflicts()
     }

@@ -16,7 +16,7 @@ export const useEventsStore = defineStore(
         const query = conflictId
           ? `?conflictId=${encodeURIComponent(conflictId)}`
           : ''
-        events.value = await api.get(`/events${query}`)
+        events.value = await api.get(`/api/v1/events${query}`)
       } catch (e) {
         error.value = e.message
       } finally {

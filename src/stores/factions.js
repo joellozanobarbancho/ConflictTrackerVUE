@@ -16,7 +16,7 @@ export const useFactionsStore = defineStore(
         const query = conflictId
           ? `?conflictId=${encodeURIComponent(conflictId)}`
           : ''
-        factions.value = await api.get(`/factions${query}`)
+        factions.value = await api.get(`/api/v1/factions${query}`)
       } catch (e) {
         error.value = e.message
       } finally {
