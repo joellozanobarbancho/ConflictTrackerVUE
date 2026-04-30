@@ -1,5 +1,9 @@
+const RAILWAY_URL =
+  'https://conflicttrackerapi-production.up.railway.app/api/v1'
+
 const API_BASE_URL =
-  import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080/api/v1'
+  import.meta.env.VITE_API_BASE_URL ??
+  (import.meta.env.PROD ? RAILWAY_URL : 'http://localhost:8080/api/v1')
 
 /*
 const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === 'true'
